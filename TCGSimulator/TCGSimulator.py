@@ -317,7 +317,33 @@ def create_customer():
 
 
 if __name__ == "__main__":
-    budget = 10000
+
+    budget_in = input("enter your budget")
+    budget = int(budget_in)
+    rent_in = input("enter the amount you're paying for rent")
+    rent = int(rent_in)
+    digimon_booster_box_divide_in = input("percentage of booster boxes you want to sell for digimon?")
+    pokemon_booster_box_divide_in = input("percentage of booster boxes you want to sell for pokemon?")
+    gundam_booster_box_divide_in = input("percentage of booster boxes you want to sell for gundam?")
+    ygo_booster_box_divide_in = input("percentage of booster boxes you want to sell for yugioh?")
+    
+    digimon_booster_box_divide = int(digimon_booster_box_divide_in) / 100
+    pokemon_booster_box_divide = int(pokemon_booster_box_divide_in) / 100
+    gundam_booster_box_divide = int(gundam_booster_box_divide_in) / 100
+    ygo_booster_box_divide = int(ygo_booster_box_divide_in)/ 100
+
+    digimon_booster_pack_divide_in = input("percentage of booster packs you want to sell for digimon from remaining booster boxes?")
+    pokemon_booster_pack_divide_in = input("percentage of booster packs you want to sell for pokemon from remaining booster boxes?")
+    gundam_booster_pack_divide_in = input("percentage of booster packs you want to sell for gundam from remaining booster boxes?")
+    ygo_booster_pack_divide_in = input("percentage of booster packs you want to sell for yugioh from remaining booster boxes?")
+
+    digimon_booster_pack_divide = int(digimon_booster_pack_divide_in) / 100
+    pokemon_booster_pack_divide = int(pokemon_booster_pack_divide_in) / 100
+    gundam_booster_pack_divide = int(gundam_booster_pack_divide_in) / 100
+    ygo_booster_pack_divide = int(ygo_booster_pack_divide_in)/ 100
+
+
+
    
     selection_map = {"pokemon":[],
     "yugioh":[],
@@ -345,10 +371,10 @@ if __name__ == "__main__":
             print("went over budget")
             break
        
-        pokemon_sim = pokemon.PokemonTCGSimulator(0.00, budget_arr[0],.33,.25).open_numbered_packs()
-        gundam_sim = gundam.GundamTCGSimulator(0.00, budget_arr[1],.33,.25).open_numbered_packs()
-        digimon_sim = digimon.DigimonTCGSimulator(0.0, budget_arr[2],.33,.25).open_numbered_packs()
-        ygo_sim = yugioh.YugiohTCGSimulator(0.0, budget_arr[3],.33,.25).open_numbered_packs()
+        pokemon_sim = pokemon.PokemonTCGSimulator(0.00, budget_arr[0],pokemon_booster_box_divide,pokemon_booster_pack_divide).open_numbered_packs()
+        gundam_sim = gundam.GundamTCGSimulator(0.00, budget_arr[1],gundam_booster_box_divide,gundam_booster_pack_divide).open_numbered_packs()
+        digimon_sim = digimon.DigimonTCGSimulator(0.0, budget_arr[2],digimon_booster_box_divide,digimon_booster_pack_divide).open_numbered_packs()
+        ygo_sim = yugioh.YugiohTCGSimulator(0.0, budget_arr[3],ygo_booster_box_divide,ygo_booster_pack_divide).open_numbered_packs()
         sim_container = [pokemon_sim,gundam_sim,digimon_sim,ygo_sim]
        
         if k == 0:
@@ -397,7 +423,7 @@ if __name__ == "__main__":
         #add the profit to our current budget
         budget += profit
         #rent money
-        budget -= 800
+        budget -= rent
        
         #collection salary
         budget -= 2200
