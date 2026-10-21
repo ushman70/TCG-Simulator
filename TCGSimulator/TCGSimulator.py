@@ -320,6 +320,13 @@ if __name__ == "__main__":
 
     budget_in = input("enter your budget")
     budget = int(budget_in)
+    cust_min_in = input("Minimum amount of customers per month?")
+    cust_min = int(cust_min_in)
+    cust_max_in = input("Maximum amount of customers per month")
+    cust_max = int(cust_max_in)
+    salary_in = input("Salary for the month?")
+    salary = int(salary_in)
+
     rent_in = input("enter the amount you're paying for rent")
     rent = int(rent_in)
     digimon_booster_box_divide_in = input("percentage of booster boxes you want to sell for digimon?")
@@ -395,7 +402,7 @@ if __name__ == "__main__":
                 l += 1
        
         #now create customers
-        people = random.randint(50,80)
+        people = random.randint(cust_min,cust_max)
         online_custs = 0
        
         while i < people:
@@ -426,7 +433,7 @@ if __name__ == "__main__":
         budget -= rent
        
         #collection salary
-        budget -= 2200
+        budget -= salary
         print(f"remaining budget:",{budget})
    
     print(f"Business survived:",{k}," months")
