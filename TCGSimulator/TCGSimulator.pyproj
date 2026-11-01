@@ -21,11 +21,15 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="CSVReader.py" />
     <Compile Include="digimon.py" />
     <Compile Include="gundam.py" />
     <Compile Include="pokemon.py" />
     <Compile Include="TCGSimulator.py" />
     <Compile Include="yugioh.py" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="pokemon_card_prices.csv" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
   <!-- Uncomment the CoreCompile target to enable the Build command in

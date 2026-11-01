@@ -1,7 +1,7 @@
 import itertools
 import math
 import random
-
+from CSVReader import write_to_csv, read_from_csv
 
 class PokemonTCGSimulator:
    
@@ -67,11 +67,21 @@ class PokemonTCGSimulator:
             return card
 
     def determine_price(self, rarity):
-        SIR = [200.00, 25.00, 15.00, 21.00, 10.00, 14.00]
-        UR = [10.00, 5.00, 12.00, 4.00, 8.00, 3.00, 2.00, 6.00]
-        HR = [40.00, 25.00, 5.00, 15.00]
-        IR = [1.50, 2.00, 0.80]
-        DR = [1.50, 0.10, 0.50, 0.25]
+        rarity_prices = {}
+        read_from_csv(rarity_prices, "pokemon_card_prices.csv", delimiter=",")
+
+        SIR = rarity_prices["SIR"]
+        UR = rarity_prices["UR"]
+        HR = rarity_prices["HR"]
+        IR = rarity_prices["IR"]
+        DR = rarity_prices["DR"]
+
+        
+        #SIR = [200.00, 25.00, 15.00, 21.00, 10.00, 14.00]
+        #UR = [10.00, 5.00, 12.00, 4.00, 8.00, 3.00, 2.00, 6.00]
+        #HR = [40.00, 25.00, 5.00, 15.00]
+        #IR = [1.50, 2.00, 0.80]
+        #DR = [1.50, 0.10, 0.50, 0.25]
 
         SIR_rng = random.randint(0, len(SIR) - 1)
         UR_rng = random.randint(0, len(UR) - 1)
