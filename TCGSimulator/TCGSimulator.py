@@ -381,11 +381,15 @@ if __name__ == "__main__":
     while budget > 0:
         profit = 0
         budget_arr.clear()
-       
+        sub_budget = 0
         for j in percentage_arr:
             budget_arr.append(j * budget)
-            budget -= (j * budget)
-           
+            print(j * budget)
+            sub_budget += (j * budget)
+
+        budget -= sub_budget
+        print(f"current budget:", {budget})
+
         if budget < 0:
             print("went over budget")
             break
@@ -432,7 +436,10 @@ if __name__ == "__main__":
        
         i = 0
         k += 1
-        print(selection_map)
+
+        for tcg in selection_map.values():
+            print(tcg)
+
         for j in selection_map.values():
             budget += j[3]
        
@@ -447,7 +454,7 @@ if __name__ == "__main__":
         #collection salary
         budget -= salary
         print(f"remaining budget:",{budget})
-        operational_cost = profit - (budget + salary + rent)
+        operational_cost = profit - (salary + rent)
 
         if operational_cost < 0:
             print(f"You are currently operating in the negative by:", {operational_cost})
