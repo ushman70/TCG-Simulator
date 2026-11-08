@@ -316,6 +316,7 @@ def create_customer():
     return total_buying_power
 
 
+
 if __name__ == "__main__":
 
     budget_in = input("enter your budget")
@@ -326,6 +327,17 @@ if __name__ == "__main__":
     cust_max = int(cust_max_in)
     salary_in = input("Salary for the month?")
     salary = int(salary_in)
+
+    #budget allocation for percentage_arr, which dictates how much of the budget is 
+    #split for each tcg, it does not need to add up to 100.
+    pokemon_alloc_in = input("Budget allocation for pokemon?")
+    gundam_alloc_in = input("Budget allocation for gundam?")
+    digimon_alloc_in = input("Budget allocation for digimon?")
+    ygo_alloc_in = input("Budget allocation for yugioh?")
+    pokemon_alloc = int(pokemon_alloc_in) / 100
+    gundam_alloc = int(gundam_alloc_in) / 100
+    digimon_alloc = int(digimon_alloc_in) / 100
+    ygo_alloc = int(ygo_alloc_in) / 100
 
     rent_in = input("enter the amount you're paying for rent")
     rent = int(rent_in)
@@ -363,7 +375,7 @@ if __name__ == "__main__":
     profit = 0
     #percentages assigned to each tcg for our budget
     #pokemon,gudam,digimon,yugioh
-    percentage_arr = [.2,.1,.1,.15]
+    percentage_arr = [pokemon_alloc,gundam_alloc,digimon_alloc,ygo_alloc]
     budget_arr = []
    
     while budget > 0:
@@ -435,5 +447,54 @@ if __name__ == "__main__":
         #collection salary
         budget -= salary
         print(f"remaining budget:",{budget})
+        operational_cost = profit - (budget + salary + rent)
+
+        if operational_cost < 0:
+            print(f"You are currently operating in the negative by:", {operational_cost})
+        else:
+            print(f"You are currently operating in the positive by:", {operational_cost})
+
+        changes = input("Would you like to make changes? (Type y/n)")
+
+        if changes == "y":
+            salary_in = input("Salary for the month?")
+            salary = int(salary_in)
+            cust_min_in = input("Minimum amount of customers per month?")
+            cust_min = int(cust_min_in)
+            cust_max_in = input("Maximum amount of customers per month")
+            cust_max = int(cust_max_in)
+
+            pokemon_alloc_in = input("Budget allocation for pokemon?")
+            gundam_alloc_in = input("Budget allocation for gundam?")
+            digimon_alloc_in = input("Budget allocation for digimon?")
+            ygo_alloc_in = input("Budget allocation for yugioh?")
+            pokemon_alloc = int(pokemon_alloc_in) / 100
+            gundam_alloc = int(gundam_alloc_in) / 100
+            digimon_alloc = int(digimon_alloc_in) / 100
+            ygo_alloc = int(ygo_alloc_in) / 100
+
+            digimon_booster_box_divide_in = input("percentage of booster boxes you want to sell for digimon?")
+            pokemon_booster_box_divide_in = input("percentage of booster boxes you want to sell for pokemon?")
+            gundam_booster_box_divide_in = input("percentage of booster boxes you want to sell for gundam?")
+            ygo_booster_box_divide_in = input("percentage of booster boxes you want to sell for yugioh?")
+    
+            digimon_booster_box_divide = int(digimon_booster_box_divide_in) / 100
+            pokemon_booster_box_divide = int(pokemon_booster_box_divide_in) / 100
+            gundam_booster_box_divide = int(gundam_booster_box_divide_in) / 100
+            ygo_booster_box_divide = int(ygo_booster_box_divide_in)/ 100
+
+            digimon_booster_pack_divide_in = input("percentage of booster packs you want to sell for digimon from remaining booster boxes?")
+            pokemon_booster_pack_divide_in = input("percentage of booster packs you want to sell for pokemon from remaining booster boxes?")
+            gundam_booster_pack_divide_in = input("percentage of booster packs you want to sell for gundam from remaining booster boxes?")
+            ygo_booster_pack_divide_in = input("percentage of booster packs you want to sell for yugioh from remaining booster boxes?")
+
+            digimon_booster_pack_divide = int(digimon_booster_pack_divide_in) / 100
+            pokemon_booster_pack_divide = int(pokemon_booster_pack_divide_in) / 100
+            gundam_booster_pack_divide = int(gundam_booster_pack_divide_in) / 100
+            ygo_booster_pack_divide = int(ygo_booster_pack_divide_in)/ 100
+
+
+
+
    
     print(f"Business survived:",{k}," months")
