@@ -249,6 +249,22 @@ class Customer():
                
        
         return profit
+
+
+def value_interp(selection_map):
+    for key in selection_map.keys():
+        index = 0
+        for vals in selection_map[key][4]:
+            determine_plus_minus = random.randint(0,2)
+            percentage_inc_dec = random.randint(1,20)
+            if determine_plus_minus == 0:
+                selection_map[key][4][index] = vals
+            elif determine_plus_minus == 1:
+                selection_map[key][4][index] += (vals * (percentage_inc_dec/100))
+            else:
+                selection_map[key][4][index] -= (vals * (percentage_inc_dec/100))
+           
+            index += 1
                
        
 
@@ -373,6 +389,11 @@ if __name__ == "__main__":
     i = 0
     k = 0
     profit = 0
+    first_derivative = 0
+    second_derivative = 0
+    prev_profit = 0
+    prev_derivative = 0
+
     #percentages assigned to each tcg for our budget
     #pokemon,gudam,digimon,yugioh
     percentage_arr = [pokemon_alloc,gundam_alloc,digimon_alloc,ygo_alloc]
@@ -420,7 +441,17 @@ if __name__ == "__main__":
         #now create customers
         people = random.randint(cust_min,cust_max)
         online_custs = 0
-       
+
+        #print("before interp")
+
+        #for tcg in selection_map.values():
+           # print(tcg)
+
+        #print("after interp")
+
+        value_interp(selection_map)
+
+        
         while i < people:
             online = False
        
@@ -439,6 +470,7 @@ if __name__ == "__main__":
 
         for tcg in selection_map.values():
             print(tcg)
+        
 
         for j in selection_map.values():
             budget += j[3]
@@ -460,6 +492,43 @@ if __name__ == "__main__":
             print(f"You are currently operating in the negative by:", {operational_cost})
         else:
             print(f"You are currently operating in the positive by:", {operational_cost})
+
+
+        if k == 1:
+            prev_profit = profit
+        elif k == 2:
+            first_derivative = profit -  prev_profit
+            prev_profit = profit
+            prev_derivative = first_derivative
+
+            if first_derivative > 0:
+                print(f"The business is trending upward. Calculated rate of change is:",{first_derivative})
+            elif first_derivative == 0:
+                print(f"The business is static. Calculated rate of change is:",{first_derivative})
+            else:
+                print(f"The business is trending downward and you are losing money. Calculated rate of change is:",{first_derivative})
+
+        elif k >= 3:
+            first_derivative = profit -  prev_profit
+            second_derivative = first_derivative - prev_derivative
+            prev_derivative = first_derivative
+            prev_profit = profit
+
+            if first_derivative > 0:
+                print(f"The business is trending upward. Calculated rate of change is:",{first_derivative})
+            elif first_derivative == 0:
+                print(f"The business is static. Calculated rate of change is:",{first_derivative})
+            else:
+                print(f"The business is trending downward and you will lose money. Calculated rate of change is:",{first_derivative})
+
+            if second_derivative > 0:
+                print(f"The rate of change is improving. Calculated changing rate is:",{second_derivative})
+            elif first_derivative == 0:
+                print(f"The change of rate is satic. Calculated rate of change is:",{second_derivative})
+            else:
+                print(f"The rate of change is negative. Calculated rate of change is:",{second_derivative})
+
+
 
         changes = input("Would you like to make changes? (Type y/n)")
 
