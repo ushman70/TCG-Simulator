@@ -449,13 +449,15 @@ if __name__ == "__main__":
 
         #print("after interp")
 
+        #randomize online user distribution, 33%,25%,20%...etc
         value_interp(selection_map)
-
         
+        mod = random.randint(3, 7)
+        print(f"Mod is:", {mod})
         while i < people:
             online = False
        
-            if i % 3 == 0:
+            if i % mod == 0:
                 online_custs += 1
                 online = True
            
@@ -523,7 +525,7 @@ if __name__ == "__main__":
 
             if second_derivative > 0:
                 print(f"The rate of change is improving. Calculated changing rate is:",{second_derivative})
-            elif first_derivative == 0:
+            elif second_derivative == 0:
                 print(f"The change of rate is satic. Calculated rate of change is:",{second_derivative})
             else:
                 print(f"The rate of change is negative. Calculated rate of change is:",{second_derivative})
